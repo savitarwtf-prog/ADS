@@ -2,38 +2,32 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("=== TESTING PHYSICAL STRUCTURES ===");
         testArrayList();
-        System.out.println("---------------------------");
+        System.out.println("\n---------------------------\n");
         testLinkedList();
+
+        System.out.println("\n=== TESTING LOGICAL STRUCTURES ===");
+        testStack();
+        System.out.println("\n---------------------------\n");
+        testQueue();
+        System.out.println("\n---------------------------\n");
+        testMinHeap();
     }
 
     public static void testArrayList() {
         System.out.println("Testing MyArrayList:");
         MyList<Integer> list = new MyArrayList<>();
-
-        // Тестируем add и size
         list.add(10);
         list.add(20);
         list.add(30);
-        System.out.println("Size after adding 3 elements: " + list.size());
+        list.add(1, 15); // Вставка 15 на индекс 1
 
-        // Тестируем add(index) и get
-        list.add(1, 15);
-        System.out.println("Element at index 1: " + list.get(1)); // Должно быть 15
+        System.out.println("Size: " + list.size());
+        System.out.println("Element at index 1: " + list.get(1));
 
-        // Тестируем remove
-        list.remove(2);
-        System.out.println("Size after removal: " + list.size());
-        System.out.println("Element at index 2 now: " + list.get(2)); // Должно быть 30
-
-        // Тестируем exists и indexOf
-        System.out.println("Exists 15? " + list.exists(15));
-        System.out.println("Index of 30: " + list.indexOf(30));
-
-        // Тестируем sort
-        list.add(5);
         list.sort();
-        System.out.print("Sorted list: ");
+        System.out.print("Sorted ArrayList: ");
         for (Integer i : list) {
             System.out.print(i + " ");
         }
@@ -43,21 +37,53 @@ public class Main {
     public static void testLinkedList() {
         System.out.println("Testing MyLinkedList:");
         MyList<String> list = new MyLinkedList<>();
-
-        // Тестируем addFirst и addLast
         list.addLast("Middle");
         list.addFirst("Start");
         list.addLast("End");
 
-        System.out.println("First element: " + list.getFirst());
-        System.out.println("Last element: " + list.getLast());
+        System.out.println("First: " + list.getFirst());
+        System.out.println("Last: " + list.getLast());
 
-        // Тестируем removeFirst и removeLast
         list.removeFirst();
-        System.out.println("New first after removeFirst: " + list.getFirst());
+        System.out.println("After removeFirst, new First: " + list.getFirst());
+        System.out.println("Size: " + list.size());
+    }
 
-        // Тестируем clear
-        list.clear();
-        System.out.println("Size after clear: " + list.size());
+    public static void testStack() {
+        System.out.println("Testing MyStack (LIFO):");
+        MyStack<Integer> stack = new MyStack<>();
+        stack.push(100);
+        stack.push(200);
+        stack.push(300);
+
+        System.out.println("Top element (peek): " + stack.peek());
+        System.out.println("Popped: " + stack.pop());
+        System.out.println("New top: " + stack.peek());
+    }
+
+    public static void testQueue() {
+        System.out.println("Testing MyQueue (FIFO):");
+        MyQueue<String> queue = new MyQueue<>();
+        queue.enqueue("Patient 1");
+        queue.enqueue("Patient 2");
+        queue.enqueue("Patient 3");
+
+        System.out.println("Front element: " + queue.peek());
+        System.out.println("Dequeued: " + queue.dequeue());
+        System.out.println("Next in line: " + queue.peek());
+    }
+
+    public static void testMinHeap() {
+        System.out.println("Testing MyMinHeap (Priority):");
+        MyMinHeap<Integer> heap = new MyMinHeap<>();
+        // Добавляем элементы в случайном порядке
+        heap.insert(50);
+        heap.insert(10);
+        heap.insert(40);
+        heap.insert(5);
+
+        // Извлекаем — должен всегда выходить самый маленький элемент
+        System.out.println("Smallest (extracted): " + heap.extractMin()); // Должно быть 5
+        System.out.println("Next smallest: " + heap.extractMin()); // Должно быть 10
     }
 }
