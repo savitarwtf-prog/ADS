@@ -56,5 +56,8 @@ public class Main {
         list.removeFirst();
         System.out.println("New first after removeFirst: " + list.getFirst());
 
+        // Тестируем clear
+        list.clear();
+        System.out.println("Size after clear: " + list.size());
     }
 }
